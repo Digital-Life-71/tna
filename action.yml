@@ -1,0 +1,47 @@
+name: 'Отправка сообщения'
+description: 'Отправка тестового сообщения в Telegram' # Описание действия
+inputs:
+  TELEGRAM_TOKEN:
+    description: 'Токен Telegram'
+    required: true
+    default: ''
+  TELEGRAM_CHAT_ID:
+    description: 'ID чата Telegram'
+    required: true
+    default: ''
+  TELEGRAM_MESSAGE:
+    description: 'Сообщение для отправки'
+    required: true
+    default: |
+      📝 Commit: ${{ github.event.head_commit.message }}
+      ⚠️ Branch: ${{ github.ref_name }}
+      👤 Author: ${{ github.actor }}
+  BUTTON_TEXT:
+    description: 'Текст кнопки'
+    required: true
+    default: 'Посмотреть'
+  BUTTON_URL:
+    description: 'URL кнопки'
+    required: true
+    default: 'https://github.com/${{ github.repository }}/commit/${{ github.sha }}'
+  DISABLE_NOTIFICATION:
+    description: 'Отключить уведомления'
+    required: false
+    default: 'true'
+runs:
+  using: 'composite'
+  steps:
+    - name: Отправка сообщения в Telegram # Название шага
+      shell: bash # Использование оболочки bash
+      env:
+        TELEGRAM_TOKEN: ${{ inputs.TELEGRAM_TOKEN }} # Установка переменной окружения TELEGRAM_TOKEN
+        TELEGRAM_CHAT_ID: ${{ inputs.TELEGRAM_CHAT_ID }} # Установка переменной окружения TELEGRAM_CHAT_ID
+        TELEGRAM_MESSAGE: ${{ inputs.TELEGRAM_MESSAGE }} # Установка переменной окружения TELEGRAM_MESSAGE
+        BUTTON_TEXT: ${{ inputs.BUTTON_TEXT }} # Установка переменной окружения BUTTON_TEXT
+        BUTTON_URL: ${{ inputs.BUTTON_URL }} # Установка переменной окружения BUTTON_URL
+        DISABLE_NOTIFICATION: ${{ inputs.DISABLE_NOTIFICATION }} # Установка переменной окружения DISABLE_NOTIFICATION
+      run: |
+        set -e
+        echo "Отправка сообщения в Telegram..."
+        PAYLOAD="chat_id=${TELEGRAM_CHAT_ID}&text=${TELEGRAM_MESSAGE}&disable_notification=${DISABLE_NOTIFICATION}&reply_markup={\"inline_keyboard\":[[{\"text\":\"${BUTTON_TEXT}\",\"url\":\"${BUTTON_URL}\"}]]}"
+        curl -v -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" -d "${PAYLOAD}"
