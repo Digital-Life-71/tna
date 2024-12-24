@@ -97,3 +97,7 @@ runs:
         echo "Отправка сообщения в Telegram..."
         PAYLOAD="chat_id=${TELEGRAM_CHAT_ID}&text=${TELEGRAM_MESSAGE}&disable_notification=${DISABLE_NOTIFICATION}&reply_markup={\"inline_keyboard\":[[{\"text\":\"${BUTTON_TEXT}\",\"url\":\"${BUTTON_URL}\"}]]}"
         curl -v -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" -d "${PAYLOAD}"
+
+branding:
+  icon: 'check'
+  color: 'orange'
