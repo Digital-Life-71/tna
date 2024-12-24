@@ -1,5 +1,5 @@
 name: 'Telegram Message Notify Actions'
-description: 'TNA автоматически уведомляет о событиях в репозитории, таких как пулл реквесты, коммиты и релизы, упрощая мониторинг и ускоряя коммуникацию'
+description: 'TNA уведомляет об изменениях в репозитории, ускоряя мониторинг и коммуникацию'
 author: 'Digital-Life-71'
 inputs:
   TELEGRAM_TOKEN:
