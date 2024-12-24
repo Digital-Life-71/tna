@@ -1,4 +1,4 @@
-# tna
+# Telegram Message Notify Actions (TNA)
 
 Это действие отправляет тестовое сообщение в Telegram с использованием заданных параметров.
 
