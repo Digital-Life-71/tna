@@ -16,6 +16,12 @@ inputs:
       📝 Commit: ${{ github.event.head_commit.message }}
       ⚠️ Branch: ${{ github.ref_name }}
       👤 Author: ${{ github.actor }}
+      📅 Date: ${{ github.event.head_commit.timestamp }}
+      📂 Repository: ${{ github.repository }}
+      🔗 Commit URL: ${{ github.event.head_commit.url }}
+      🆔 Commit ID: ${{ github.sha }}
+      🏷️ Repository Owner: ${{ github.repository_owner }}
+      📛 Repository Name: ${{ github.event.repository.name }}
   BUTTON_TEXT:
     description: 'Текст кнопки'
     required: true
@@ -28,6 +34,42 @@ inputs:
     description: 'Отключить уведомления'
     required: false
     default: 'true'
+  COMMIT:
+    description: 'Коммит'
+    required: false
+    default: ''
+  BRANCH:
+    description: 'Ветка'
+    required: false
+    default: ''
+  AUTHOR:
+    description: 'Автор'
+    required: false
+    default: ''
+  DATE:
+    description: 'Дата коммита'
+    required: false
+    default: ''
+  REPOSITORY:
+    description: 'Репозиторий'
+    required: false
+    default: ''
+  COMMIT_URL:
+    description: 'URL коммита'
+    required: false
+    default: ''
+  COMMIT_ID:
+    description: 'ID коммита'
+    required: false
+    default: ''
+  REPOSITORY_OWNER:
+    description: 'Владелец репозитория'
+    required: false
+    default: ''
+  REPOSITORY_NAME:
+    description: 'Имя репозитория'
+    required: false
+    default: ''
 runs:
   using: 'composite'
   steps:
@@ -40,6 +82,15 @@ runs:
         BUTTON_TEXT: ${{ inputs.BUTTON_TEXT }} # Установка переменной окружения BUTTON_TEXT
         BUTTON_URL: ${{ inputs.BUTTON_URL }} # Установка переменной окружения BUTTON_URL
         DISABLE_NOTIFICATION: ${{ inputs.DISABLE_NOTIFICATION }} # Установка переменной окружения DISABLE_NOTIFICATION
+        COMMIT: ${{ inputs.COMMIT }} # Установка переменной окружения COMMIT
+        BRANCH: ${{ inputs.BRANCH }} # Установка переменной окружения BRANCH
+        AUTHOR: ${{ inputs.AUTHOR }} # Установка переменной окружения AUTHOR
+        DATE: ${{ inputs.DATE }} # Установка переменной окружения DATE
+        REPOSITORY: ${{ inputs.REPOSITORY }} # Установка переменной окружения REPOSITORY
+        COMMIT_URL: ${{ inputs.COMMIT_URL }} # Установка переменной окружения COMMIT_URL
+        COMMIT_ID: ${{ inputs.COMMIT_ID }} # Установка переменной окружения COMMIT_ID
+        REPOSITORY_OWNER: ${{ inputs.REPOSITORY_OWNER }} # Установка переменной окружения REPOSITORY_OWNER
+        REPOSITORY_NAME: ${{ inputs.REPOSITORY_NAME }} # Установка переменной окружения REPOSITORY_NAME
       run: |
         set -e
         echo "Отправка сообщения в Telegram..."
