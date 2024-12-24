@@ -1,5 +1,6 @@
-name: 'Отправка сообщения'
-description: 'Отправка тестового сообщения в Telegram' # Описание действия
+name: 'Telegram Message Notify Actions'
+description: 'TNA позволяет автоматически уведомлять о событиях в вашем репозитории, таких как пулл реквесты, коммиты или релизы. Это упрощает мониторинг и ускоряет коммуникацию внутри команды.'
+author: 'Digital-Life-71'
 inputs:
   TELEGRAM_TOKEN:
     description: 'Токен Telegram'
